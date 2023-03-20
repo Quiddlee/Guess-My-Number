@@ -11,12 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
   const highScore = highScoreElem.firstElementChild;
   let score = +scoreElem.textContent;
-  let guessingNum = Math.floor(Math.random() * 20) + 1;
+  let guessingNum;
 
   if (localStorage.getItem('highScore')) {
     highScore.textContent = localStorage.getItem(
         'highScore');
   }
+
+  const playAgain = () => {
+    body.style.backgroundColor = '#222';
+    userInput.value = '';
+    scoreElem.textContent = score = 20;
+    message.textContent = 'Start guessing...';
+    number.textContent = '?';
+    guessingNum = Math.floor(Math.random() * 20) + 1;
+  };
+  playAgain();
 
   guessBtn.addEventListener('click', () => {
     const userVal = +userInput.value;
@@ -32,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     else {
+      if (score === 0) return playAgain();
       scoreElem.textContent = --score;
       message.textContent = userVal > guessingNum ?
                             '📈 Too high!' :
@@ -40,10 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   againBtn.addEventListener('click', () => {
-    body.style.backgroundColor = '#222';
-    userInput.value = '';
-    scoreElem.textContent = score = 20;
-    message.textContent = 'Start guessing...';
-    number.textContent = '?';
+    playAgain();
   });
 });
