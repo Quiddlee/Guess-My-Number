@@ -11,11 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
   const highScore = highScoreElem.firstElementChild;
   let score = +scoreElem.textContent;
-  let guessingNum;
+  let guessedNum;
 
   if (localStorage.getItem('highScore')) {
-    highScore.textContent = localStorage.getItem(
-        'highScore');
+    highScore.textContent = localStorage.getItem('highScore');
   }
 
   const playAgain = () => {
@@ -24,17 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
     scoreElem.textContent = score = 20;
     message.textContent = 'Start guessing...';
     number.textContent = '?';
-    guessingNum = Math.floor(Math.random() * 20) + 1;
+    guessedNum = Math.floor(Math.random() * 20) + 1;
   };
   playAgain();
 
   guessBtn.addEventListener('click', () => {
     const userVal = +userInput.value;
 
-    if (guessingNum === userVal) {
+    if (guessedNum === userVal) {
       body.style.backgroundColor = '#60b347';
       message.textContent = '🎉 Correct Number!';
-      number.textContent = guessingNum;
+      number.textContent = guessedNum;
 
       if (score > +highScore.textContent) {
         highScore.textContent = score;
@@ -44,13 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     else {
       if (score === 0) return playAgain();
       scoreElem.textContent = --score;
-      message.textContent = userVal > guessingNum ?
+      message.textContent = userVal > guessedNum ?
                             '📈 Too high!' :
                             '📉 Too low!';
     }
   });
 
-  againBtn.addEventListener('click', () => {
-    playAgain();
-  });
+  againBtn.addEventListener('click', playAgain);
 });
