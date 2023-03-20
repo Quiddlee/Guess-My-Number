@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const highScoreElem = document.querySelector('.label-highscore');
   const againBtn = document.querySelector('.again');
   const userInput = guessBtn.previousElementSibling;
-  const body = document.querySelector('body');
+  const body = document.body;
   let score = +scoreElem.textContent;
   let guessingNum = Math.floor(Math.random() * 20);
 
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   guessBtn.addEventListener('click', () => {
     const userVal = +userInput.value;
-    console.log(userVal, guessingNum);
 
     if (guessingNum === userVal) {
       body.style.backgroundColor = '#60b347';
