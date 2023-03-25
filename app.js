@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const highScore = highScoreElem.firstElementChild;
   let score = +scoreElem.textContent;
   let guessedNum;
+  let timeoutID;
 
   if (localStorage.getItem('highScore')) {
     highScore.textContent = localStorage.getItem('highScore');
@@ -29,6 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   guessBtn.addEventListener('click', () => {
     const userVal = +userInput.value;
+    clearTimeout(timeoutID);
+
+    if (!userVal) {
+      timeoutID = setTimeout(() => message.textContent = 'Start guessing...',
+                             3000);
+      return message.textContent = '⛔ No number!';
+    }
 
     if (guessedNum === userVal) {
       body.style.backgroundColor = '#60b347';
