@@ -16,6 +16,7 @@ body {
     color: #eee;
     background-color: #222;
     /* background-color: #60b347; */
+    overflow: hidden;
 }
 
 /* LAYOUT */
@@ -61,12 +62,13 @@ h1 {
     color: #333;
     font-size: 6rem;
     width: 15rem;
-    padding: 3rem 0rem;
+    padding: 3rem 0;
     text-align: center;
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 50%);
+    transition: all .2s;
 }
 
 .between {
@@ -112,8 +114,22 @@ h1 {
 .message {
     margin-bottom: 8rem;
     height: 3rem;
+    transition: .3s all;
 }
 
 .label-score {
     margin-bottom: 2rem;
+}
+
+.background {
+    position: absolute;
+    top: 34.2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background-color: #60b347;
+    border-radius: 100rem;
+    z-index: -10;
+    transition: all .4s cubic-bezier(1, .05, .85, .99); /*  cubic-bezier(1, .32, .6, 1.03)*/
 }
