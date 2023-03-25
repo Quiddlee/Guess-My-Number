@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scoreElem.textContent = score = 20;
     message.textContent = 'Start guessing...';
     number.textContent = '?';
+    number.style.width = '15rem';
     guessedNum = Math.floor(Math.random() * 20) + 1;
   };
   playAgain();
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       body.style.backgroundColor = '#60b347';
       message.textContent = '🎉 Correct Number!';
       number.textContent = guessedNum;
+      number.style.width = '30rem';
 
       if (score > +highScore.textContent) {
         highScore.textContent = score;
