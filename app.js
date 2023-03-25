@@ -13,13 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = +scoreElem.textContent;
   let guessedNum;
   let timeoutID;
+  let loseTimeout;
 
   if (localStorage.getItem('highScore')) {
     highScore.textContent = localStorage.getItem('highScore');
   }
 
   const playAgain = () => {
-    clearTimeout(timeoutID);
+    clearTimeout(loseTimeout);
+    loseTimeout = null;
+
     body.style.backgroundColor = '#222';
     userInput.value = '';
     scoreElem.textContent = score = 20;
@@ -58,7 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (score <= 0) {
         scoreElem.textContent = 0;
         message.textContent = '💥 You lose the game!';
-        timeoutID = setTimeout(() => playAgain(), 3000);
+
+        loseTimeout = loseTimeout ?
+                      loseTimeout :
+                      setTimeout(() => playAgain(), 3000);
       }
     }
   });
