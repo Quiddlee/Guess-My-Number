@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const playAgain = () => {
+    clearTimeout(timeoutID);
     body.style.backgroundColor = '#222';
     userInput.value = '';
     scoreElem.textContent = score = 20;
@@ -49,11 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     else {
-      if (score === 0) return playAgain();
       scoreElem.textContent = --score;
       message.textContent = userVal > guessedNum ?
                             '📈 Too high!' :
                             '📉 Too low!';
+
+      if (score <= 0) {
+        scoreElem.textContent = 0;
+        message.textContent = '💥 You lose the game!';
+        timeoutID = setTimeout(() => playAgain(), 3000);
+      }
     }
   });
 
